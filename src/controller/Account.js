@@ -23,51 +23,23 @@ class AccountController {
   }
 
   async create(req, res) {
-    const user = new userDTO(req.body)
-    const { userRepository, accountRepository, cardRepository, salvarUsuario, saveAccount, saveCard } = this.di
-
-    if (!user.isValid()) return res.status(400).json({ 'message': 'não houve informações enviadas' })
-    try {
-      const userCreated = await salvarUsuario({
-        user, repository: userRepository
-      })
-
-      const accountCreated = await saveAccount({ account: new accountDTO({ userId: userCreated.id, type: 'Debit' }), repository: accountRepository })
-
-      const firstCard = new cardDTO({ 
-        type: 'GOLD',
-        number: 13748712374891010 ,
-        dueDate: '2027-01-07',
-        functions: 'Debit',
-        cvc: '505',
-        paymentDate: null,
-        name: userCreated.username,
-        accountId: accountCreated.id,
-        type: 'Debit' 
-      })
-
-      const cardCreated = await saveCard({ card: firstCard, repository: cardRepository })
-
-      res.status(201).json({
-        message: 'usuário criado com sucesso',
-        result: userCreated,
-      })
-    } catch (error) {
-      console.log(error)
-      res.status(500).json({ message: 'caiu a aplicação' })
-    }
+    
 
   }
+
   async find(req, res) {
-    const { accountRepository, getAccount } = this.di
+    const { accountRepository, getAccount, getTransaction, transactionRepository } = this.di
 
     try {
     const userId =   req.user.id
       const account = await getAccount({ repository: accountRepository,  userId })
-      const transactions = await 
+      const transactions = await getTransaction({ accountId: account[0].id, repository: transactionRepository })
       res.status(200).json({
         message: 'Conta encontrada carregado com sucesso',
-        result: account
+        result: {
+          account,
+          transactions,
+        }
       })
     } catch (error) {
       res.status(500).json({

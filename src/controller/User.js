@@ -75,7 +75,7 @@ class UserController {
     const { email, password } = req.body
     const user = await getUser({ repository: userRepository, userFilter: { email, password } })
     
-    if (!user) return res.status(401).json({ message: 'Usuário não encontrado' })
+    if (!user?.[0]) return res.status(401).json({ message: 'Usuário não encontrado' })
     const userToTokenize = {...user[0], id: user[0].id.toString()}
     res.status(200).json({
       message: 'Usuário autenticado com sucesso',
