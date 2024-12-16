@@ -14,6 +14,16 @@ Rodando o projeto:
     npm i
     npm run dev
 
+
+### Importando collection no postman
+- Neste projeto possui o arquivo tech-challenge-2.postman_collection que é uma collection do postman, você tendo o postman pode clicar no botão de import e selecionar esse arquivo lá na caixa de drop,
+após realizar a importação você terá todo os Requests desse projeto.
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+
 ### Autenticando 
 
 #### Criando usuário
