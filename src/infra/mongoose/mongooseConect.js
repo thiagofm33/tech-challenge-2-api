@@ -3,7 +3,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 
 async function connectDB() {
   try {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || !process.env.MONGO_URI) {
       // Iniciar MongoDB em memória para desenvolvimento
       const mongod = await MongoMemoryServer.create();
       const mongoUri = mongod.getUri();
