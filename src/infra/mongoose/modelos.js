@@ -67,6 +67,9 @@ const DetailedAccountSchema = new Schema({
   to: {
     type: String,
   },
+  anexo: {
+    type: String,
+  },
   date: {
     type: Date,
     required: true

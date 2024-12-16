@@ -1,6 +1,3 @@
-const userDTO = require('../models/User')
-const accountDTO = require('../models/Account')
-const cardDTO = require('../models/Card')
 const TransactionDTO = require('../models/DetailedAccount')
 
 
@@ -19,26 +16,25 @@ class AccountController {
       getAccount: require('../feature/Account/getAccount'),
       saveTransaction: require('../feature/Transaction/saveTransaction'),
       getTransaction: require('../feature/Transaction/getTransaction'),
+      getCard: require('../feature/Card/getCard'),
     }, di)
   }
 
-  async create(req, res) {
-    
-
-  }
-
   async find(req, res) {
-    const { accountRepository, getAccount, getTransaction, transactionRepository } = this.di
+    const { accountRepository, getAccount, getCard, getTransaction, transactionRepository, cardRepository } = this.di
 
     try {
-    const userId =   req.user.id
+      const userId =   req.user.id
       const account = await getAccount({ repository: accountRepository,  userId })
-      const transactions = await getTransaction({ accountId: account[0].id, repository: transactionRepository })
+      const transactions = await getTransaction({ filter: { accountId: account[0].id }, repository: transactionRepository })
+      const cards = await getCard({ filter: { accountId: account[0].id }, repository: cardRepository })
+    
       res.status(200).json({
         message: 'Conta encontrada carregado com sucesso',
         result: {
           account,
           transactions,
+          cards,
         }
       })
     } catch (error) {
@@ -67,7 +63,7 @@ class AccountController {
 
     const { accountId } = req.params
 
-    const transactions = await getTransaction({accountId,  repository: transactionRepository})
+    const transactions = await getTransaction({ filter: { accountId } ,  repository: transactionRepository})
     res.status(201).json({
       message: 'Transação criada com sucesso',
       result: {

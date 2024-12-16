@@ -1,9 +1,9 @@
 const DetailedAccountModel = require("../../models/DetailedAccount")
 
 const getTransaction = async ({
-  transactionFilter, repository
+  filter, repository
 }) => {
-  const result = await repository.get(transactionFilter)
+  const result = await repository.get(filter)
   return result?.map(transaction => new DetailedAccountModel(transaction))
 }
 
