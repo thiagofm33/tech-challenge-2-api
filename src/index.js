@@ -10,8 +10,11 @@ const UserController = require('./controller/User')
 app.use(Express.json())
 
 app.use(publicRoutes)
-// app.get('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use((req, res, next) => {
+    if (req.url.includes('/docs')) {
+        return next();
+    }
     const [_, token] = req.headers['authorization']?.split(' ') || []
     const user = UserController.getToken(token)
     if (!user) return res.status(401).json({ message: 'Token inválido' })

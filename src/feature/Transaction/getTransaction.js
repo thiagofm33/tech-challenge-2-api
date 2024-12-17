@@ -7,4 +7,4 @@ const getTransaction = async ({
   return result?.map(transaction => new DetailedAccountModel(transaction))
 }
 
-module.exports = getTransaction
+module.exports = getTransaction 

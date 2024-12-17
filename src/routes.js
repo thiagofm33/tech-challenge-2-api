@@ -49,6 +49,8 @@ router.post('/account/transaction', accountController.createTransaction.bind(acc
  *     responses:
  *       200:
  *         description: Extrato encontrado
+ *       401:
+ *         description: Token invalido
  */
 router.get('/account/:accountId/statement', accountController.getStatment.bind(accountController))
 

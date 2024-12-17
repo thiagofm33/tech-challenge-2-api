@@ -8,6 +8,21 @@ const options = {
       version: '1.0.0',
       description: 'Documentação da API de Contas',
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
+    
+      }
+    },
+    security: [
+      {
+        BearerAuth: [], // Define que toda rota utilizará este esquema como padrão
+      },
+    ],
     servers: [
       {
         url: 'http://localhost:3000',
