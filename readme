@@ -24,6 +24,11 @@ após realizar a importação você terá todo os Requests desse projeto.
 ![alt text](image-1.png)
 
 
+### Swagger
+
+para acessar o Swagger basta você entrar na rota /docs
+as rotas que necessitam de Autenticação você pode colar o Bearer token no cadeado
+
 ### Autenticando 
 
 #### Criando usuário
