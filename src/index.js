@@ -6,8 +6,13 @@ const app = new Express()
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs =  require('./swagger')
 const UserController = require('./controller/User')
+const cors = require('cors')
 
 app.use(Express.json())
+
+app.use(cors({
+    origin: '*'
+}))
 
 app.use(publicRoutes)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
