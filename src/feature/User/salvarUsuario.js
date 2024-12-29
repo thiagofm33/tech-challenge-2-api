@@ -1,10 +1,11 @@
-const User = require("../../models/User")
+const User = require('../../models/User')
 
 const saveUser = async ({
   user, repository
 }) => {
-  const resultado = await repository.create(user)
-  return new User(resultado.toJSON())
+  const result = await repository.create(user)
+
+  return new User(result.toJSON())
 }
 
 module.exports = saveUser
