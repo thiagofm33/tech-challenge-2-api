@@ -30,7 +30,7 @@ class UserController {
 
       const accountCreated = await saveAccount({ account: new accountDTO({ userId: userCreated.id, type: 'Debit' }), repository: accountRepository })
 
-      const firstCard = new cardDTO({ 
+      const firstCard = new cardDTO({
         type: 'GOLD',
         number: 13748712374891010 ,
         dueDate: '2027-01-07',
@@ -39,7 +39,7 @@ class UserController {
         paymentDate: null,
         name: userCreated.username,
         accountId: accountCreated.id,
-        type: 'Debit' 
+        type: 'Debit'
       })
 
       const cardCreated = await saveCard({ card: firstCard, repository: cardRepository })
@@ -54,11 +54,13 @@ class UserController {
     }
 
   }
-  async find(req, res) {
 
+  async find(req, res) {
     const { userRepository, getUser } = this.di
+
     try {
       const users = await getUser({ repository: userRepository })
+
       res.status(200).json({
         message: 'Usuário carregado com sucesso',
         result: users
@@ -68,13 +70,13 @@ class UserController {
         message: 'Erro no servidor'
       })
     }
-    
   }
+
   async auth(req, res) {
     const { userRepository, getUser } = this.di
     const { email, password } = req.body
     const user = await getUser({ repository: userRepository, userFilter: { email, password } })
-    
+
     if (!user?.[0]) return res.status(401).json({ message: 'Usuário não encontrado' })
     const userToTokenize = {...user[0], id: user[0].id.toString()}
     res.status(200).json({
@@ -84,6 +86,7 @@ class UserController {
       }
     })
   }
+
   static getToken(token) {
     try {
         const decoded = jwt.verify(token, JWT_SECRET)
