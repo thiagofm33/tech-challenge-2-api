@@ -1,7 +1,6 @@
 ## Tech Challenge 2
 
-
-Rodando o projeto: 
+Rodando o projeto:
 - Docker
     # Construir a imagem
     docker build -t tech-challenge .
@@ -29,7 +28,7 @@ após realizar a importação você terá todo os Requests desse projeto.
 para acessar o Swagger basta você entrar na rota /docs
 as rotas que necessitam de Autenticação você pode colar o Bearer token no cadeado
 
-### Autenticando 
+### Autenticando
 
 #### Criando usuário
     "http:localhost:3000/user"
@@ -38,10 +37,10 @@ as rotas que necessitam de Autenticação você pode colar o Bearer token no cad
             "username": "Aluno Carequinha",
             "email": "teste@gmail.com",
             "password": "testes"
-        }  
+        }
 
     cURL
-    ``` 
+    ```
         curl --location 'localhost:3000/user' \
         --header 'Content-Type: application/json' \
         --data-raw '{
@@ -67,7 +66,7 @@ as rotas que necessitam de Autenticação você pode colar o Bearer token no cad
 
 #### Autenticando
     "localhost:3000/user/auth"
-    Body: 
+    Body:
         {
             "email": "teste@gmail.com",
             "password": "testes"
